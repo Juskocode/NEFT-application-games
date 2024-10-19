@@ -17,4 +17,9 @@ class Node:
         
         for i in range(0, len(self.connections)):
             self.connections[i].dst.input_value += self.connections[i].weigth * self.output_value        
-        
+    
+    def clone(self):
+        clone = Node(self.id)
+        clone.id = self.id
+        clone.layer = self.layer
+        return clone

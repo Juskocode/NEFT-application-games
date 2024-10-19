@@ -12,6 +12,8 @@ class Player:
         self.vel = 0
         self.flap = False
         self.alive = True
+        self.lifespan = 0
+        self.fitness = 0
 
         # Network atributtes
         self.decision = None
@@ -42,6 +44,9 @@ class Player:
             self.rect.y += self.vel
             if self.vel > 5:
                 self.vel = 5
+
+            # Increment lifespan
+            self.lifespan += 1
         else:
             self.alive = False
             self.flap = False
@@ -86,4 +91,15 @@ class Player:
         print(self.decision)
         if self.decision > 0.66: # 0.73 ratio to flap
             self.bird_flap()
+    
+    def calculate_fitness(self):
+        self.fitness = self.lifespan
+    
+    def clone(self):
+        clone = Player()
+        clone.fitness = self.fitness
+        clone.brain = self.brain
+        clone.brain.generate_graph()
+        return clone
+
     
