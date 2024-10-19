@@ -52,5 +52,5 @@ class Player:
     # Network functions
     def think(self):
         self.decision = random.uniform(0, 1)
-        if self.decision > 0.73: # 0.73 ratio to flap
+        if self.decision > 0.78: # 0.73 ratio to flap
             self.bird_flap()
