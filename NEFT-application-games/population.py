@@ -75,7 +75,13 @@ class Population:
             for i in range(0, children_per_species):
                 children.append(s.offspring())
         
-        
+        while len(children) < self.size:
+            children.append(self.species[0].offspring())
+
+        self.players = []
+        for child in children:
+            self.players.append(child)
+        self.generation += 1
     
     # Return true if all players are dead
     def purge(self):
