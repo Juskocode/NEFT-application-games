@@ -15,12 +15,13 @@ class Brain:
         for i in range(0, self.inputs):
             self.nodes.append(node.Node(i))
             self.nodes[i].layer = 0
+
         # Create bias node
-        self.node.append(node.Node(3))
+        self.nodes.append(node.Node(3))
         self.nodes[3].layer = 0
 
         # Create output layer
-        self.node.append(node.Node(5))
+        self.nodes.append(node.Node(4))
         self.nodes[4].layer = 1
         
         # Create connections
@@ -41,11 +42,12 @@ class Brain:
         for i in range(0, self.layers):
            for j in range(0, len(self.nodes)):
                if self.nodes[j].layer == i:
-                   self.graph.append(self.nodes[i])
+                   self.graph.append(self.nodes[j])
     
     def feed_forward(self, vision):
         for i in range(0, self.inputs):
             self.nodes[i].output_value = vision[i]
+            #print(vision[i])
 
         self.nodes[3].output_value = 1
 
@@ -55,7 +57,7 @@ class Brain:
         output_value = self.nodes[4].output_value
 
         for i in range(0, len(self.nodes)):
-            self.graph[i].input_value = 0
+            self.nodes[i].input_value = 0
         
         return output_value
 

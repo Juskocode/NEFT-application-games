@@ -1,6 +1,7 @@
 import random
 import pygame
 import config
+import brain
 
 class Player:
     def __init__(self):
@@ -14,6 +15,10 @@ class Player:
 
         # Network atributtes
         self.decision = None
+        self.vision = [0.5, 1, 0.5]
+        self.inputs = 3
+        self.brain = brain.Brain(self.inputs)
+        self.brain.generate_graph()
 
     
     def draw(self, window):
@@ -49,8 +54,36 @@ class Player:
         if self.vel >= -3:
             self.flap = False
     
+    @staticmethod
+    def closest_pipe():
+        for p in config.pipes:
+            if not p.passed:
+                return p
+    
     # Network functions
+    def look(self):
+        if config.pipes:
+
+            # line to top pipe
+            self.vision[0] = max(0, self.rect.center[1] - self.closest_pipe().top_rect.bottom) / 500
+            pygame.draw.line(config.window, self.Color, self.rect.center, 
+                             (self.rect.center[0], config.pipes[0].top_rect.bottom))
+            
+            # line to mid of pipes
+            self.vision[1] = max(0, self.closest_pipe().x - self.rect.center[0]) / 500
+            pygame.draw.line(config.window, self.Color, self.rect.center, 
+                             (config.pipes[0].x, self.rect.center[1]))
+            
+            # line to bot pipe
+            self.vision[2] = max(0, self.closest_pipe().bot_rect.top - self.rect.center[1]) / 500
+            pygame.draw.line(config.window, self.Color, self.rect.center, 
+                             (self.rect.center[0], config.pipes[0].bot_rect.top))
+            
+            
+
     def think(self):
-        self.decision = random.uniform(0, 1)
-        if self.decision > 0.78: # 0.73 ratio to flap
+        self.decision = self.brain.feed_forward(self.vision)
+        print(self.decision)
+        if self.decision > 0.66: # 0.73 ratio to flap
             self.bird_flap()
+    
