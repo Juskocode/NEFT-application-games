@@ -34,9 +34,9 @@ The core of the bird's decision-making process is based on a simple **Perceptron
 
 The **sigmoid** function is used as the activation function for each node in the neural network. It ensures that the output is smooth and falls within a range of (0, 1). The sigmoid function is given by the following equation:
 
-\[
+$[
 \text{sigmoid}(x) = \frac{1}{1 + e^{-x}}
-\]
+$]
 
 This function is crucial because it allows us to map any input (whether negative or positive) into a probability-like value. The bird’s decision to flap or not is based on whether the output of the sigmoid is closer to 1 or 0.
 
