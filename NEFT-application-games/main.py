@@ -6,7 +6,7 @@ import population
 
 pygame.init()
 clock = pygame.time.Clock()
-population = population.Population(1000)
+population = population.Population(100)
 
 def generate_pipes():
     config.pipes.append(components.Pipes(config.win_width))

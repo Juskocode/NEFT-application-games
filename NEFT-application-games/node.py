@@ -2,7 +2,7 @@ import math
 
 class Node:
     def __init__(self, id_number):
-        self.id_number = id_number
+        self.id = id_number
         self.layer = 0
         self.input_value = 0
         self.output_value = 0

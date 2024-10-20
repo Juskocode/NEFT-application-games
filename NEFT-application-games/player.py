@@ -88,8 +88,7 @@ class Player:
 
     def think(self):
         self.decision = self.brain.feed_forward(self.vision)
-        print(self.decision)
-        if self.decision > 0.66: # 0.73 ratio to flap
+        if self.decision > 0.7: # 0.7 ratio of activation
             self.bird_flap()
     
     def calculate_fitness(self):
